@@ -9,7 +9,7 @@ const Navbar = () => {
             <NavLink href={"/"}>Home</NavLink>
         </li>
         <li>
-            <NavLink href={"/service"}>Service</NavLink>
+            <NavLink href={"/services"}>Service</NavLink>
         </li>
         <li>
             <NavLink href={"/blog"}>Blog</NavLink>
@@ -24,7 +24,7 @@ const Navbar = () => {
 
     </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 backdrop-blur-md sticky top-0 z-50 border-b border-base-200">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -48,7 +48,9 @@ const Navbar = () => {
                         {nav}
                     </ul>
                 </div>
-                <Logo></Logo>
+                <div className="-mt-4">
+                    <Logo></Logo>
+                </div>
             </div>
             <div className="navbar-center hidden md:flex">
                 <ul className="menu menu-horizontal px-1">{nav}</ul>
