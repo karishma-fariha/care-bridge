@@ -2,8 +2,14 @@ import React from 'react';
 import Logo from './Logo';
 import NavLink from '../buttons/NavLink';
 import Link from 'next/link';
-import { FiShoppingCart } from "react-icons/fi";
-const Navbar = () => {
+import { cookies } from 'next/headers'; // Added for auth check
+import { logoutAction } from '@/actions/auth'; // Import your logout action
+
+const Navbar = async () => {
+    // Check if the user is logged in by looking for the cookie
+    const cookieStore = await cookies();
+    const isLoggedIn = cookieStore.has('auth_token');
+
     const nav = <>
         <li>
             <NavLink href={"/"}>Home</NavLink>
@@ -16,14 +22,12 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink href={"/experts"}>Experts</NavLink>
-
         </li>
         <li>
             <NavLink href={"/contact"}>Contact</NavLink>
         </li>
-       
-
     </>
+
     return (
         <div className="navbar bg-base-100 backdrop-blur-md sticky top-0 z-50 border-b border-base-200">
             <div className="navbar-start">
@@ -34,12 +38,10 @@ const Navbar = () => {
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor">
-                            {" "}
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                            {" "}
                         </svg>
                     </div>
                     <ul
@@ -53,14 +55,26 @@ const Navbar = () => {
                     <Logo></Logo>
                 </div>
             </div>
-            <div className="navbar-center hidden md:flex">
+            <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">{nav}</ul>
             </div>
             <div className="navbar-end space-x-4">
-                <Link href={"/cart"} className='btn btn-primary'>
-                Book Now
+                <Link href={"/services"} className='btn btn-primary'>
+                    Book Now
                 </Link>
-                <Link href={"/login"}> <button className='btn btn-outline btn-primary'>Login</button></Link>
+
+                {/* Conditional Logic: Show Logout if logged in, else show Login */}
+                {isLoggedIn ? (
+                    <form action={logoutAction}>
+                        <button type="submit" className='btn btn-outline btn-error'>
+                            Logout
+                        </button>
+                    </form>
+                ) : (
+                    <Link href={"/login"}>
+                        <button className='btn btn-outline btn-primary'>Login</button>
+                    </Link>
+                )}
             </div>
         </div>
     );

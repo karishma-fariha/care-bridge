@@ -1,19 +1,18 @@
 "use client";
-import React from 'react';
+import React, { useActionState } from 'react'; // Updated import
 import Link from 'next/link';
 import { Mail, Lock, ArrowRight, HeartPulse } from 'lucide-react';
-import { useFormState } from "react-dom";
 import { loginAction, loginDemoUser } from "@/actions/auth";
 
 const LoginPage = () => {
-    // 1. Hook for handling the server action response
-    const [state, formAction] = useFormState(loginAction, null);
+    // 1. Updated hook from useFormState to useActionState
+    const [state, formAction, isPending] = useActionState(loginAction, null);
 
     return (
         <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
             <div className="max-w-5xl w-full bg-base-200 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row border border-base-300">
                 
-                {/* Left Side: Branding & Image */}
+                {/* Left Side: Branding */}
                 <div className="md:w-1/2 bg-neutral p-12 text-base-100 flex flex-col justify-between relative overflow-hidden">
                     <div className="absolute top-[-10%] left-[-10%] w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
                     
@@ -40,18 +39,21 @@ const LoginPage = () => {
                     </div>
                 </div>
 
-                {/* Right Side: Login Form */}
+                {/* Right Side: Form */}
                 <div className="md:w-1/2 p-8 md:p-16 bg-base-100">
                     <div className="max-w-md mx-auto">
-                        <div className="mb-10">
+                        <div className="mb-10 text-center md:text-left">
                             <h2 className="text-3xl font-black text-neutral mb-2">Sign In</h2>
-                            <p className="text-neutral/50 font-medium text-sm">Use <b>admin@carebridge.com</b> / <b>password123</b></p>
+                            <p className="text-neutral/50 font-medium text-sm">
+                                Use <b className="text-neutral">admin@carebridge.com</b> / <b className="text-neutral">password123</b>
+                            </p>
                         </div>
 
-                        {/* Error Message Display */}
+                        {/* Error Message */}
                         {state?.error && (
-                            <div className="alert alert-error mb-6 rounded-xl text-sm font-bold animate-pulse">
-                                <span>{state.error}</span>
+                            <div className="bg-red-50 text-red-600 border border-red-100 p-4 rounded-2xl text-sm mb-6 font-bold flex items-center gap-2">
+                                <div className="w-2 h-2 bg-red-600 rounded-full animate-ping"></div>
+                                {state.error}
                             </div>
                         )}
 
@@ -84,14 +86,17 @@ const LoginPage = () => {
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn btn-primary w-full rounded-2xl h-14 text-lg font-black shadow-lg shadow-primary/20">
-                                Sign In
+                            <button 
+                                type="submit" 
+                                disabled={isPending}
+                                className="btn btn-primary w-full rounded-2xl h-14 text-lg font-black shadow-lg shadow-primary/20 disabled:opacity-70"
+                            >
+                                {isPending ? "Signing In..." : "Sign In"}
                             </button>
                         </form>
 
                         <div className="divider text-xs font-bold text-neutral/30 uppercase my-8">Or Instant Access</div>
 
-                        {/* DEMO USER BUTTON */}
                         <button 
                             type="button"
                             onClick={() => loginDemoUser()}
@@ -100,13 +105,6 @@ const LoginPage = () => {
                             Log in as Demo User
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </button>
-
-                        <p className="mt-8 text-center text-neutral/50 text-sm font-medium">
-                            Don't have an account? {' '}
-                            <Link href="/register" className="text-primary font-bold hover:underline">
-                                Create an account
-                            </Link>
-                        </p>
                     </div>
                 </div>
 

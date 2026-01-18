@@ -1,19 +1,31 @@
-const uri = process.env.MONGODB_URI;
-const dbname = process.env.DBNAME ;
-export const collections ={
-    PRODUCTS:"services",
-    CAREGIVERS: "caregivers",
-}
-const { MongoClient, ServerApiVersion } = require('mongodb');
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
-export const dbConnect =(cname)=>{
-    return client.db(dbname).collection(cname);
+const uri = process.env.MONGODB_URI;
+const dbname = process.env.DBNAME;
+
+export const collections = {
+    SERVICES: "services",    // Renamed from PRODUCTS to SERVICES to match your usage
+    CAREGIVERS: "caregivers",
+};
+
+// Create a singleton client to prevent opening too many connections in dev mode
+let client;
+
+if (!client) {
+    client = new MongoClient(uri, {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    });
 }
+
+export const dbConnect = (cname) => {
+    // Safety check: Ensure the collection name exists
+    if (!cname) {
+        console.error("CRITICAL: dbConnect called with undefined collection name!");
+        return null; 
+    }
+    return client.db(dbname).collection(cname);
+};

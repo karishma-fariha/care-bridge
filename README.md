@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+🩺 CareBridge | Baby Sitting & Elderly Care Service Platform
+CareBridge is a modern, full-stack web application designed to connect families with certified caretakers for children, the elderly, and medical assistance. Built with a focus on trust and professional support, it provides a seamless interface for browsing specialists and managing healthcare needs.
 
-## Getting Started
+Live Link: https://care-bridge-one.vercel.app/services
 
-First, run the development server:
+🚀 Technologies Used
+Framework: Next.js 16 (App Router)
 
-```bash
+Language: JavaScript (ES6+)
+
+Database: MongoDB (Native Driver)
+
+Authentication: Mock Credentials with HTTP-only Cookies
+
+Styling: Tailwind CSS + DaisyUI (OKLCH Color Palette)
+
+Icons: Lucide React
+
+Components: Swiper.js (Coverflow Effect)
+
+Deployment: Vercel
+
+✨ Implemented Features
+1. Dynamic Caregiver Grid
+Fetches 16+ professional caregiver profiles directly from MongoDB. Profiles include experience, ratings, bios, and specialized certifications.
+
+2. Mock Authentication & Protected Routes
+Implements a secure mock login system.
+
+Route Guard: Middleware prevents unauthenticated access to the Experts page.
+
+Demo Access: A "Demo User" button allows instant login for testers.
+
+Cookie-based Session: Stores a mock token in a secure cookie to persist the session.
+
+3. Server-Side Pagination
+Efficiently manages large datasets using MongoDB .skip() and .limit(). This ensures the application stays fast even as the number of caregivers grows.
+
+4. Interactive 3D Testimonials
+Uses Swiper.js with a Coverflow effect to display family feedback in a high-end, touch-responsive 3D slider.
+
+5. Services & FAQ System
+Categorized care packages (Baby Care, Elderly Care, etc.) with dynamic pricing and a DaisyUI-powered accordion FAQ to answer common user concerns.
+
+🛠️ Setup & Installation
+Follow these steps to run the project locally:
+
+Clone the Repository:
+git clone https://github.com/your-username/care-bridge.git
+cd care-bridge
+
+Install Dependencies:
+npm install
+Environment Variables: Create a .env.local file in the root and add your MongoDB URI:
+
+MONGODB_URI=your_mongodb_connection_string
+Configure Images: Ensure next.config.mjs allows the necessary hostnames:
+
+JavaScript
+
+// next.config.mjs
+images: {
+  remotePatterns: [
+    { protocol: 'https', hostname: 'i.pravatar.cc' },
+    { protocol: 'https', hostname: 'images.unsplash.com' }
+  ]
+}
+
+
+Run Development Server:
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 to view the result.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+👤 Mock Credentials
+To test the manual login, use the following:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Email: admin@carebridge.com
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Password: password123
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Developed by Karishma Fariha

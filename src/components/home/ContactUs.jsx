@@ -7,7 +7,7 @@ const ContactUs = () => {
             <div className="container mx-auto px-4 md:px-12">
                 <div className="bg-base-200 rounded-[3rem] overflow-hidden shadow-sm border border-base-300">
                     <div className="grid grid-cols-1 lg:grid-cols-2">
-                        
+
                         {/* Left Side: Contact Information */}
                         <div className="p-8 md:p-16 bg-neutral text-base-100">
                             <h2 className="text-primary font-bold uppercase tracking-widest text-sm mb-3">
@@ -18,7 +18,7 @@ const ContactUs = () => {
                                 <span className="text-primary">Your Care Needs</span>
                             </h3>
                             <p className="text-base-100/60 text-lg mb-12">
-                                Have questions about our services or need a custom care plan? 
+                                Have questions about our services or need a custom care plan?
                                 Reach out and our team will get back to you within 24 hours.
                             </p>
 
@@ -77,12 +77,16 @@ const ContactUs = () => {
                                     <label className="label">
                                         <span className="label-text font-bold text-neutral">Service Type</span>
                                     </label>
-                                    <select className="select select-bordered bg-base-100 rounded-xl focus:border-primary focus:outline-none font-medium">
-                                        <option disabled selected>Select a Service</option>
+                                    <select
+                                        defaultValue="default"
+                                        className="select select-bordered bg-base-100 rounded-xl focus:border-primary focus:outline-none font-medium"
+                                    >
+                                        <option value="default" disabled>
+                                            Select a Service
+                                        </option>
                                         <option>Elderly Care</option>
                                         <option>Baby Care</option>
                                         <option>Sick Support</option>
-                                        <option>Post-Surgery Recovery</option>
                                     </select>
                                 </div>
 

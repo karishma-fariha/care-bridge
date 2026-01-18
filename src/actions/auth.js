@@ -32,10 +32,15 @@ export async function loginDemoUser() {
         httpOnly: true,
         path: "/",
     });
-    redirect("/experts");
+    redirect("/");
 }
 
+// export async function logoutAction() {
+//     (await cookies()).delete("auth_token");
+//     redirect("/login");
+// }
 export async function logoutAction() {
-    (await cookies()).delete("auth_token");
-    redirect("/login");
+    const cookieStore = await cookies();
+    cookieStore.delete("auth_token"); // Clears the session
+    redirect("/login"); // Sends user back to login
 }

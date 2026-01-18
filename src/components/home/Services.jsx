@@ -2,9 +2,12 @@ import React from 'react';
 import ServiceCard from '../cards/ServiceCard';
 import Link from 'next/link';
 import { getFeaturedServices } from '@/actions/server/service';
+import { cookies } from 'next/headers';
 
 const Services = async() => {
     const services = (await getFeaturedServices()) || [] ;
+    const cookieStore = await cookies();
+    const isLoggedIn = cookieStore.has("auth_token");
    
     return (
         <div className='bg-base-100 px-4 md:px-12'>
@@ -15,7 +18,9 @@ const Services = async() => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
                 {services.map(service => (
-                    <ServiceCard key={service.id} service={service} />
+                    <ServiceCard key={service.id} 
+                    service={service} 
+                    isLoggedIn={isLoggedIn}/>
                 ))}
             </div>
             <div className="flex justify-center mt-12">

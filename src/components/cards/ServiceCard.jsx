@@ -1,10 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const ServiceCard = ({ service }) => {
-    const { title, image, pricePerHour, discount, serviceType, ratings, reviews, info } = service;
-    
-    // Calculate discounted price
+const ServiceCard = ({ service, isLoggedIn }) => {
+    const { _id, title, image, pricePerHour, discount, serviceType, ratings, reviews, info } = service;
     const discountedPrice = pricePerHour - (pricePerHour * discount) / 100;
 
     return (
@@ -17,7 +15,7 @@ const ServiceCard = ({ service }) => {
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
-                    <span className="badge bg-transparent text-primary font-bold px-4 py-3">{serviceType}</span>
+                    <span className="badge bg-white/90 text-primary font-bold px-4 py-3">{serviceType}</span>
                 </div>
                 {discount > 0 && (
                     <div className="absolute top-4 right-4">
@@ -48,14 +46,27 @@ const ServiceCard = ({ service }) => {
 
                 <div className="divider my-2"></div>
 
-                <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-center justify-between mt-auto mb-4">
                     <div>
                         <p className="text-sm text-gray-400 line-through">৳{pricePerHour}</p>
                         <p className="text-2xl font-black text-primary">৳{discountedPrice}<span className="text-xs font-normal text-gray-500">/hr</span></p>
                     </div>
-                    <Link href={`/services/${service._id}`} className="btn btn-primary btn-sm rounded-lg">Details</Link>
+                    {/* Updated Details Link */}
+                    <Link 
+                        href={isLoggedIn ? `/services/${_id}` : '/login'} 
+                        className="btn btn-primary btn-sm rounded-lg"
+                    >
+                        Details
+                    </Link>
                 </div>
-                    <Link href={"/"} className="btn btn-primary btn-outline rounded-lg hover:btn-primary w-full">Add to Cart</Link>
+
+                {/* Updated Book Now Link to also check login */}
+                <Link 
+                    href={isLoggedIn ? `/booking/${_id}` : '/login'} 
+                    className="btn btn-primary btn-outline rounded-lg hover:btn-primary w-full"
+                >
+                    {isLoggedIn ? "Book Now" : "Login to Book"}
+                </Link>
             </div>
         </div>
     );
