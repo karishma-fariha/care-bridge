@@ -8,19 +8,20 @@ const Navbar = () => {
         <li>
             <NavLink href={"/"}>Home</NavLink>
         </li>
+         <li>
+            <NavLink href={"/about"}>About</NavLink>
+        </li>
         <li>
             <NavLink href={"/services"}>Service</NavLink>
         </li>
         <li>
-            <NavLink href={"/blog"}>Blog</NavLink>
+            <NavLink href={"/experts"}>Experts</NavLink>
 
         </li>
         <li>
             <NavLink href={"/contact"}>Contact</NavLink>
         </li>
-        <li>
-            <NavLink href={"/about"}>About</NavLink>
-        </li>
+       
 
     </>
     return (
@@ -57,7 +58,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end space-x-4">
                 <Link href={"/cart"} className='btn btn-primary'>
-                <FiShoppingCart></FiShoppingCart>
+                Book Now
                 </Link>
                 <Link href={"/login"}> <button className='btn btn-outline btn-primary'>Login</button></Link>
             </div>

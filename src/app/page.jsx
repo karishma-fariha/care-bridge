@@ -1,6 +1,10 @@
 import Banner from "@/components/home/Banner";
+import ExpertCaregivers from "@/components/home/ExpertCaregivers";
+import FAQ from "@/components/home/FAQ";
+import HowItWorks from "@/components/home/HowItWorks";
 import Services from "@/components/home/Services";
-import Image from "next/image";
+import Testimonials from "@/components/home/Testimonials";
+import WhyChooseUs from "@/components/home/WhyChooseUs";
 
 export default function Home() {
   return (
@@ -10,6 +14,21 @@ export default function Home() {
       </section>
       <section>
         <Services></Services>
+      </section>
+      <section>
+        <WhyChooseUs></WhyChooseUs>
+      </section>
+      <section>
+        <HowItWorks></HowItWorks>
+      </section>
+      <section>
+        <ExpertCaregivers></ExpertCaregivers>
+      </section>
+      <section>
+        <Testimonials></Testimonials>
+      </section>
+      <section>
+        <FAQ></FAQ>
       </section>
     </div>
   );

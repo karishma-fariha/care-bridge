@@ -7,10 +7,8 @@ const Footer = () => {
         <div className="footer sm:footer-horizontal bg-neutral/80 text-neutral-content p-10">
             <div className="-mt-10">
                 <Logo></Logo>
-                <p className="text-xs w-60">
-                    CareBridge connects you with certified caretakers for children, the elderly,
-                    and medical assistance. Experience safety, comfort, and professional
-                    support right at your doorstep.
+                <p className="w-60">
+                    CareBridge connects you with certified caretakers
                 </p>
             </div>
             <nav>
